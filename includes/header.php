@@ -1,73 +1,25 @@
-        <!-- Navigation-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="index.php">ANY&co</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.php">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about-us.php">About</a></li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="index.php">All Products</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="shop-categories.php">Categor Wise</a></li>
-                            </ul>
-                        </li>
-<?php if($_SESSION['id']==0){?>
-          <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Users</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="login.php">Login</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="signup.php">Sign Up</a></li>
-                            </ul>
-                        </li>
-                                     <li class="nav-item"><a class="nav-link" href="admin/">Admin</a></li>
-                    <?php } else {?>
-                        <li class="nav-item"><a class="nav-link" href="my-wishlist.php">My Wishlist</a></li>
-                                  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">My Account</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="my-orders.php">Orders</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="my-profile.php">Profile</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="change-password.php">Change Password</a></li>
-                                  <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="manage-addresses.php">Adresses</a></li>
-                                  <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
-                            </ul>
-                        </li>
-                     <?php } ?>  
-                      <li class="nav-item"><a class="nav-link" href="contact-us.php">Contact us</a></li> 
-        
-                    </ul>  
-<?php if($_SESSION['id']!=0):?>
-<strong>Welcome:</strong> <?php echo $_SESSION['username'];?> &nbsp;
-<?php endif;?>
-                    <form class="d-flex">
-
-
-                        <?php 
-$uid=$_SESSION['id'];
-                        $ret=mysqli_query($con,"select sum(productQty) as qtyy from cart where userId='$uid'");
-$result=mysqli_fetch_array($ret);
-$cartcount=$result['qtyy'];
-                        ?>
-                        <a class="btn btn-outline-dark" href="my-cart.php">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
-                            <?php if($cartcount==0):?>
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
-                        <?php else: ?>
-                            <span class="badge bg-dark text-white ms-1 rounded-pill"><?php echo $cartcount; ?></span>
-                            <?php endif;?>
-                        </a>
-                    </form>
-
+     <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="dashboard.php">ANY&co</a>
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+            <!-- Navbar Search-->
+            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" method="post" action="search-orders.php">
+                <div class="input-group">
+                    <input class="form-control" type="text" name="searchinputdata" placeholder="Enter Name or Order No." aria-label="Search for..." aria-describedby="btnNavbarSearch" required />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="submit" name="search"><i class="fas fa-search"></i></button>
                 </div>
-            </div>
+            </form>
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        <li><a class="dropdown-item" href="admin-profile.php">Profile</a></li>
+                        <li><a class="dropdown-item" href="change-password.php">Change Password</a></li>
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="logout.php">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
         </nav>
